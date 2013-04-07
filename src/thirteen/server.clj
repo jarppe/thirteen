@@ -10,8 +10,7 @@
 
 (defn commit [request]
   (println "*** COMMIT: ***")
-  (pprint (:json request))
-  (println "Returning 200 OK")
+  (pprint (dissoc request :body))
   (status 200 "ok"))
 
 (def app-routes
