@@ -15,7 +15,7 @@
   (status 200 "ok"))
 
 (defn commit [request]
-  (if-let [payload (:payload request)]
+  (if-let [payload (get-in request [:params :payload])]
     (handle-commit (c/parse-string payload))
     (do
       (println "BAD REQUEST:")
