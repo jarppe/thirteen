@@ -1,7 +1,8 @@
 (defproject thirteen "0.1.0-SNAPSHOT"
   :dependencies [[org.clojure/clojure "1.5.1"]
                  [lib-noir "0.4.9"]
-                 [compojure "1.1.5" :exclusions [ring/ring-core]]]
+                 [compojure "1.1.5" :exclusions [ring/ring-core]]
+                 [slingshot "0.10.3"]]
   :profiles {:prod {:ring {:handler thirteen.server/prod-app
                            :open-browser? false
                            :stacktraces? false
