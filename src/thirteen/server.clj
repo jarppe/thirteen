@@ -6,12 +6,17 @@
             [noir.response :refer [status json]]
             [ring.adapter.jetty :as jetty]
             [ring.middleware.reload :refer [wrap-reload]]
+            [cheshire.core :as c]
             [thirteen.util :as util]))
 
-(defn commit [request]
-  (println "*** COMMIT: ***")
-  (pprint (dissoc request :body))
+(defn handle-commit [payload]
+  (pprint payload)
   (status 200 "ok"))
+
+(defn commit [request]
+  (if-let [payload (:payload request)]
+    (handle-commit (c/parse-string payload))
+    (status 400 "bad request")))
 
 (def app-routes
   [(POST "/github/commit" [] commit)
