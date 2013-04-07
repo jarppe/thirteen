@@ -11,6 +11,7 @@
 (defn commit [request]
   (println "*** COMMIT: ***")
   (pprint (:json request))
+  (println "Returning 200 OK")
   (status 200 "ok"))
 
 (def app-routes
