@@ -10,13 +10,17 @@
             [thirteen.util :as util]))
 
 (defn handle-commit [payload]
+  (println "SUCCESS:")
   (pprint payload)
   (status 200 "ok"))
 
 (defn commit [request]
   (if-let [payload (:payload request)]
     (handle-commit (c/parse-string payload))
-    (status 400 "bad request")))
+    (do
+      (println "BAD REQUEST:")
+      (pprint request)
+      (status 400 "bad request"))))
 
 (def app-routes
   [(POST "/github/commit" [] commit)
