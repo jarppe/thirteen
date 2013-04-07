@@ -12,11 +12,12 @@
             [thirteen.util :as util]))
 
 (defn commit [payload]
-  (let [pusher (:pusher payload)
-        user (:name pusher)
-        email (:email pusher)
-        branch (second (re-find #"^refs\/heads\/(.*)$" (:ref payload)))]
-    (println (format "PUSH: branch=%s, user=%s (%s)" branch user email))
+  (let [project  (:name (:repository payload))
+        pusher   (:pusher payload)
+        user     (:name pusher)
+        email    (:email pusher)
+        branch   (second (re-find #"^refs\/heads\/(.*)$" (:ref payload)))]
+    (println (format "PUSH: project=%s, branch=%s, user=%s (%s)" project branch user email))
     (status 200 "ok")))
 
 (defn github [request]
