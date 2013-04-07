@@ -26,7 +26,7 @@
     (when-not from-github?
       (println "warn: attempted access from non-github address:" ip)
       (throw+ {:status 403}))
-    (if-not payload
+    (when-not payload
       (println "warn: missing payload")
       (throw+ {:status 400}))
     (commit (c/parse-string payload true))))
