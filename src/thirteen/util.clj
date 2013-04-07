@@ -62,9 +62,3 @@
       (handler request)
       (catch map? {:keys [status message]}
         (resp/status status (or message ""))))))
-
-(try+
-  (throw+ {:status "foo"})
-  (catch map? {status :status message :message}
-    (println "Ups:" status)))
-
